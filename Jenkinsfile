@@ -28,6 +28,8 @@ pipeline {
                     pattern="index.html"
 
                     find "$directory" -type f | grep "$pattern"
+
+                    npm test
                 '''
             }
         }
