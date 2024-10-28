@@ -1,8 +1,6 @@
 pipeline {
     agent any
 
-    directory="build"
-    pattern="index.html"
 
     stages {
         stage('Build') {
@@ -26,6 +24,9 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
+                    directory="build"
+                    pattern="index.html"
+                    
                     find "$directory" -type f | grep "$pattern"
                     npm test
                 '''
