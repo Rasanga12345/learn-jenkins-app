@@ -99,6 +99,7 @@ pipeline {
                     input message: 'Do you wish to deploy to production?', ok: 'Yes, I am sure!'
                 }
             }
+        }    
 
         stage('Prod stage') {
             agent{
