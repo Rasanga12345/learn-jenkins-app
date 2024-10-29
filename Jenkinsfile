@@ -93,12 +93,12 @@ pipeline {
             }
 
         } 
-        stage('Approval') {
+    /*    stage('Approval') {
             steps {
                 input message: 'Do yoou wish to deploy to production', ok: 'Yes, I am sure!'
             }
 
-        } 
+        } */
          
 
         stage('Prod stage') {
