@@ -67,7 +67,7 @@ pipeline {
 
                     post{
                         always{
-                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'PlaywrightHTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'PlaywrightHTML Local Report', reportTitles: '', useWrapperFileDirectly: true])
                         }
                     }
                 }              
@@ -92,7 +92,31 @@ pipeline {
                 '''
             }
 
-        }   
+        } 
+
+        stage('Prod E2E') {
+            environment{
+                CI_ENVIRONMENT_URL = 'https://playful-cupcake-c51acb.netlify.app'
+            }            
+
+            agent{
+                docker{
+                    image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                    npx playwright test --reporter=html
+                '''
+            }
+
+            post{
+                always{
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'PlaywrightHTML E2E Report', reportTitles: '', useWrapperFileDirectly: true])
+                }
+            }
+        }                
   
     }
 }
