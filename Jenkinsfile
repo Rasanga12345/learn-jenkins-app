@@ -23,7 +23,7 @@ pipeline {
                     sh '''
                         aws --version 
                         echo "Hello S3!" > index.html
-                        aws s3 cp test.txt s3://mjenkins-20241030/index.html             
+                        aws s3 cp index.html s3://mjenkins-20241030/index.html             
                     '''
                 }
                 
