@@ -3,7 +3,7 @@ pipeline {
 
     environment{
         REACT_APP_VERSION = "1.0.$BUILD_ID"
-        AWS_DEFAULT_REGION 'use-east-1'
+        AWS_DEFAULT_REGION 'us-east-1'
     }
 
 
